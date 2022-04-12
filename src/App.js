@@ -4,11 +4,7 @@ import Create from './pages/Create'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 const theme = createTheme({
-  palette : {
-    primary : {
-      main : '#fefefe'
-    }
-  }, 
+  
   typography : {
     fontFamily : 'Quicksand',
     fontWeightLight : 400,
@@ -28,6 +24,9 @@ function App() {
           </Route>
           <Route path="/create">
             <Create />
+          </Route>
+          <Route path="/notes">
+            <Notes />
           </Route>
         </Switch>
     </Router>

@@ -5,7 +5,13 @@ import Container from '@mui/material/Container';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { makeStyles } from '@mui/styles';
 import TextField from '@mui/material/TextField';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
 import './create.css';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
 
@@ -13,18 +19,34 @@ const useStyles = makeStyles({
 
 export default function Create() {
   const classes = useStyles();
+  const history = useHistory();
   const [title,setTitle] = useState('');
   const [details,setDetails] = useState('')
+  const [titleError,setTitleError] = useState(false);
+  const [detailsError,setDetailsError] = useState(false);
+  const [category,setCategory] = useState('money');
 
   const handleSubmit = e => {
     e.preventDefault();
-    
+    setTitleError(false);
+    setDetailsError(false);
 
-    if (title && details) {
-      console.log(title,details);
-    } else {
-      console.log(`value are missing`)
+    if(title == '') {
+      setTitleError(true)
+    } 
+    if (details == '') {
+      setDetailsError(true)
     }
+    
+    if (title && details) {
+      fetch('http://localhost:8000/notes', {
+        method: 'POST',
+        headers : {'Content-type' : 'application/json'},
+        body : JSON.stringify({ title, details, category })
+      })
+        .then(() => history.push('/'))
+    }
+
   }
 
   return (
@@ -38,7 +60,7 @@ export default function Create() {
         Create a new note
       </Typography>
 
-      <form noValidate autoComplete='off'>
+      <form noValidate autoComplete='off' onSubmit={handleSubmit} className="FormContainer">
         <TextField
           onChange={e => setTitle(e.target.value)}
           label="Note Title"
@@ -48,6 +70,7 @@ export default function Create() {
           required
           margin='normal'
           display='block'
+          error={titleError}
         />
 
         <TextField
@@ -61,14 +84,28 @@ export default function Create() {
           display='block'
           multiline
           rows={4}
+          error={detailsError}
         />
+        
+
+        <FormControl>
+          <FormLabel>Note Category</FormLabel>
+            <RadioGroup 
+              value={category} 
+              onChange={e => setCategory(e.target.value)}
+            >
+              <FormControlLabel control={<Radio />} value="money" label="Money" />
+              <FormControlLabel control={<Radio />} value="ok" label="Ok" />
+              <FormControlLabel control={<Radio />} value="gas" label="Gas" />
+          </RadioGroup>
+        </FormControl>
 
         <Button
-          onSubmit={handleSubmit}
+          type='submit'
           variant="contained"
           color="primary"
           endIcon={<KeyboardArrowRightIcon />}
-          className='test'
+          className='submitBtn'
         >
           Submit
         </Button>
