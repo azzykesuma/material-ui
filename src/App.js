@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Notes from './pages/Notes'
 import Create from './pages/Create'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+import Layout from '../src/Components/Layout'
 
 const theme = createTheme({
   
@@ -18,17 +19,19 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <Switch>
-          <Route exact path="/">
-            <Notes />
-          </Route>
-          <Route path="/create">
-            <Create />
-          </Route>
-          <Route path="/notes">
-            <Notes />
-          </Route>
-        </Switch>
+        <Layout>
+          <Switch>
+            <Route exact path="/">
+              <Notes />
+            </Route>
+            <Route path="/create">
+              <Create />
+            </Route>
+            <Route path="/notes">
+              <Notes />
+            </Route>
+          </Switch>
+        </Layout>
     </Router>
     </ThemeProvider>
   );
