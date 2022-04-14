@@ -2,6 +2,26 @@
     display: flex;
 }
 
+.appbar {
+    width : calc(100% - 240px);
+}
+
+.active {
+    background: #f4f4f4;
+}
+
+.margin {
+    height: 100px;
+}
+
+.textTitle {
+    padding-left: 250px;
+}
+
+.title {
+    padding : 10px;
+}
+
 .page {
     background : #f9f9f9;
     width : 100%;
