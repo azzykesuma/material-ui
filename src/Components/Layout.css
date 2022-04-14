@@ -16,6 +16,7 @@
 
 .textTitle {
     padding-left: 250px;
+    flex-grow: 1;
 }
 
 .title {
@@ -33,4 +34,8 @@
 
 .drawerPaper {
     width : 240px;
+}
+
+.avatar {
+    margin-left: 1em;
 }

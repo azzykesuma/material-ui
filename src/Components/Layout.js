@@ -9,7 +9,8 @@ import ListItemText from '@mui/material/ListItemText';
 import { SubjectOutlined, AddCircleOutlined } from '@mui/icons-material';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import { Box } from '@mui/system';
+import { format } from 'date-fns';
+import Avatar from '@mui/material/Avatar';
 
 const useStyles = makeStyles({
     active : {
@@ -40,11 +41,18 @@ const Layout = ({ children }) => {
     return (
         <div className='root'>
 
-            <AppBar className='appbar'>
+            <AppBar className='appbar' elevation={0}>
                 <Toolbar>
                     <Typography className='textTitle'>
-                        Welcome to Note
+                    today is the { format(new Date(), 'do MMMM y')}
                     </Typography>
+                    <Typography>
+                        Mario
+                    </Typography>
+                    <Avatar
+                    src="/img.jpg"
+                    className="avatar"
+                    />
                 </Toolbar>
             </AppBar>
 

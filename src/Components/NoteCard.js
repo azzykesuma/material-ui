@@ -5,12 +5,16 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import IconButton from '@mui/material/IconButton';
 import { DeleteOutline } from '@mui/icons-material';
 import { Typography } from '@mui/material';
+import Avatar from '@mui/material/Avatar';
 
 const NoteCard = ({ note,handleDelete }) => {
     return (
         <div>
             <Card elevation={1}>
                 <CardHeader
+                    avatar={
+                        <Avatar>{note.category[0].toUpperCase()}</Avatar>
+                    }
                     action={
                     <IconButton onClick={() => handleDelete(note.id)}>
                         <DeleteOutline />
